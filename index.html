@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="ur" dir="rtl">
+<html lang="ur" dir="rtl" id="htmlTag">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>قرآن حفظ و تجوید ٹیسٹ - لطافت اکیڈمی</title>
+    <title id="pageTitle">قرآن حفظ و تجوید ٹیسٹ - لطافت اکیڈمی</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Nastaliq+Urdu:wght@400;700&family=Noto+Sans+Arabic:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Nastaliq+Urdu:wght@400;700&family=Noto+Sans+Arabic:wght@400;600&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
     <style>
         /* پیج کا بیک گراؤنڈ */
@@ -13,11 +13,12 @@
             background-color: #f0fdf4;
             margin: 0;
             padding: 20px;
-            font-family: 'Noto Sans Arabic', Arial, sans-serif;
+            font-family: 'Noto Sans Arabic', 'Poppins', Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            transition: all 0.3s ease;
         }
 
         .quran-app-wrapper {
@@ -27,7 +28,6 @@
             border-radius: 15px;
             box-shadow: 0 15px 40px rgba(0,0,0,0.08);
             padding: 40px 30px;
-            direction: rtl;
             border-top: 8px solid #0E8A5D; 
             position: relative;
             overflow: hidden;
@@ -35,12 +35,38 @@
             display: flex;
             flex-direction: column;
         }
+
+        /* لینگویج بٹن */
+        .lang-toggle-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #f0fdf4;
+            border: 1px solid #cce8d6;
+            color: #0E8A5D;
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: 'Poppins', 'Noto Sans Arabic', sans-serif;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+        .lang-toggle-btn:hover {
+            background: #0E8A5D;
+            color: white;
+        }
+        html[dir="ltr"] .lang-toggle-btn {
+            right: auto;
+            left: 20px;
+        }
+
         .quran-premium-header {
             text-align: center;
+            margin-top: 20px;
             margin-bottom: 35px;
             padding-bottom: 25px;
             border-bottom: 2px dashed #cce8d6;
-            position: relative;
         }
         .bismillah-text {
             font-family: 'Amiri', serif;
@@ -48,6 +74,8 @@
             color: #14B87D;
             margin-bottom: 10px;
         }
+        
+        /* اردو اور انگلش کے لیے الگ الگ فونٹس کی سیٹنگ */
         .main-title {
             color: #0E8A5D;
             font-family: 'Noto Nastaliq Urdu', serif;
@@ -57,10 +85,14 @@
             font-weight: 700;
             text-shadow: 1px 2px 4px rgba(14, 138, 93, 0.15);
         }
-        /* آپ کے بتائے ہوئے ڈیزائن کے مطابق سب ٹائٹل */
+        html[dir="ltr"] .main-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
         .sub-title {
             color: #444;
-            font-family: 'Noto Sans Arabic', sans-serif;
             font-size: 18px;
             font-weight: 600;
             background: #f0fdf4;
@@ -70,6 +102,11 @@
             border: 1px solid #cce8d6;
             margin-bottom: 10px;
         }
+        html[dir="ltr"] .sub-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+        }
+
         .quran-select-box {
             width: 100%;
             max-width: 400px;
@@ -79,16 +116,12 @@
             border-radius: 8px;
             background-color: #fcfcfc;
             color: #333;
-            font-family: 'Noto Sans Arabic', serif;
             transition: all 0.3s ease;
             display: block;
             margin: 0 auto;
         }
-        .quran-select-box:focus {
-            border-color: #0E8A5D;
-            outline: none;
-            box-shadow: 0 0 8px rgba(14, 138, 93, 0.2);
-        }
+        .quran-select-box:focus { border-color: #0E8A5D; outline: none; }
+
         .quran-btn {
             display: block;
             margin: 25px auto;
@@ -100,35 +133,27 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            font-family: 'Noto Sans Arabic', sans-serif;
         }
-        .btn-green {
-            background: linear-gradient(135deg, #0E8A5D, #14B87D);
-            color: white;
-        }
-        .btn-green:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(14, 138, 93, 0.3);
-        }
-        .btn-red {
-            background: linear-gradient(135deg, #D32F2F, #F44336);
-            color: white;
-            animation: pulse 1.5s infinite; 
-        }
+        html[dir="ltr"] .quran-btn { font-family: 'Poppins', sans-serif; font-size: 16px; }
+
+        .btn-green { background: linear-gradient(135deg, #0E8A5D, #14B87D); color: white; }
+        .btn-green:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(14, 138, 93, 0.3); }
+        .btn-red { background: linear-gradient(135deg, #D32F2F, #F44336); color: white; animation: pulse 1.5s infinite; }
+        
         @keyframes pulse {
             0% { box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.7); }
             70% { box-shadow: 0 0 0 15px rgba(244, 67, 54, 0); }
             100% { box-shadow: 0 0 0 0 rgba(244, 67, 54, 0); }
         }
+
         .quran-status {
             text-align: center;
             font-size: 16px;
-            font-family: 'Noto Sans Arabic', sans-serif;
             font-weight: bold;
             padding: 10px;
-            border-radius: 8px;
             margin-top: 10px;
         }
+
         .quran-card {
             background: #f8fdfa;
             border: 1px solid #cce8d6;
@@ -141,20 +166,23 @@
         .quran-card h3 {
             margin-top: 0;
             color: #0E8A5D;
-            font-family: 'Noto Sans Arabic', sans-serif;
             font-size: 20px;
             border-bottom: 2px dashed #cce8d6;
             padding-bottom: 10px;
             margin-bottom: 15px;
         }
+        
+        /* عربی ٹیکسٹ ہمیشہ عربی فونٹ میں اور دائیں سے بائیں رہے گا، چاہے انگلش موڈ ہو */
         .quran-arabic-text {
             font-size: 36px !important;
             font-family: 'Amiri', 'Traditional Arabic', serif !important;
             color: #222;
             line-height: 2.2;
-            text-align: justify;
+            text-align: right;
             text-align-last: center;
+            direction: rtl; 
         }
+
         .quran-correction-card {
             background: #fff5f5;
             border: 1px solid #ffcdd2;
@@ -162,30 +190,13 @@
             padding: 25px;
             margin-top: 25px;
             display: none;
-            box-shadow: 0 4px 10px rgba(244, 67, 54, 0.08);
             text-align: center;
         }
-        .quran-correction-card h3 {
-            color: #d32f2f;
-            font-family: 'Noto Sans Arabic', sans-serif;
-            margin-top: 0;
-            font-size: 22px;
-        }
-        .quran-correction-card audio {
-            width: 100%;
-            margin-top: 15px;
-            border-radius: 50px;
-        }
-        .mistake-word {
-            color: #d32f2f;
-            text-decoration: underline;
-            text-decoration-color: #ffcdd2;
-            text-underline-offset: 8px;
-            font-weight: bold;
-        }
-        .correct-word {
-            color: #0E8A5D;
-        }
+        .quran-correction-card h3 { color: #d32f2f; margin-top: 0; font-size: 22px; }
+        .quran-correction-card audio { width: 100%; margin-top: 15px; border-radius: 50px; }
+
+        .mistake-word { color: #d32f2f; text-decoration: underline; text-decoration-color: #ffcdd2; text-underline-offset: 8px; font-weight: bold; }
+        .correct-word { color: #0E8A5D; }
         
         .app-footer {
             text-align: center;
@@ -198,10 +209,12 @@
             line-height: 1.8;
             width: 100%;
         }
+        html[dir="ltr"] .app-footer { font-family: 'Poppins', sans-serif; font-weight: bold; font-size: 14px; }
 
         @media (max-width: 600px) {
             .quran-app-wrapper { padding: 20px 15px; }
             .main-title { font-size: 36px; }
+            html[dir="ltr"] .main-title { font-size: 24px; }
             .sub-title { font-size: 15px; padding: 10px 15px; }
             .quran-arabic-text { font-size: 28px !important; }
             .app-footer { font-size: 16px; margin-top: 30px; }
@@ -211,15 +224,18 @@
 <body>
 
     <div class="quran-app-wrapper">
+        
+        <button id="langToggleBtn" class="lang-toggle-btn">English</button>
+
         <div class="quran-premium-header">
             <div class="bismillah-text">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
-            <h1 class="main-title">آئیے قرآن کریم سیکھیں</h1>
-            <p class="sub-title">اپنی تلاوت کی درستگی جانچیں اور قاری مشاری راشد العفاسی سے اپنی اصلاح کریں</p>
+            <h1 id="uiMainTitle" class="main-title">آئیے قرآن کریم سیکھیں</h1>
+            <p id="uiSubTitle" class="sub-title">اپنی تلاوت کی درستگی جانچیں اور قاری مشاری راشد العفاسی سے اپنی اصلاح کریں</p>
         </div>
         
         <div style="text-align: center; margin-bottom: 25px;">
             <select id="surahSelect" class="quran-select-box">
-                <option value="">سورتوں کی فہرست لوڈ ہو رہی ہے... ⏳</option>
+                <option value="" id="uiSelectDefault">سورتوں کی فہرست لوڈ ہو رہی ہے... ⏳</option>
             </select>
         </div>
 
@@ -232,28 +248,28 @@
         </div>
 
         <div id="aiResponseContainer" class="quran-card">
-            <h3>آپ نے جتنا پڑھا:</h3>
+            <h3 id="uiCard1Title">آپ نے جتنا پڑھا:</h3>
             <p id="aiResponseText" class="quran-arabic-text" lang="ar" dir="rtl"></p>
         </div>
 
         <div id="resultContainer" class="quran-card">
-            <h3>آپ کے پڑھے گئے مقام کا نتیجہ:</h3>
+            <h3 id="uiCard2Title">آپ کے پڑھے گئے مقام کا نتیجہ:</h3>
             <p id="resultText" class="quran-arabic-text" lang="ar" dir="rtl"></p>
-            <p style="text-align: center; font-size: 14px; font-family: 'Noto Sans Arabic', sans-serif; color: #888; margin-top: 20px;">
+            <p id="uiLegend" style="text-align: center; font-size: 14px; color: #888; margin-top: 20px;">
                 (<span class="correct-word">سبز = درست</span> ، <span class="mistake-word">سرخ = غلطی / چھوٹ گیا</span>)
             </p>
         </div>
 
         <div id="correctionContainer" class="quran-correction-card">
-            <h3>اپنی غلطیاں درست کریں 🎧</h3>
-            <p id="mistakeMessage" style="font-size: 18px; color: #333; font-weight:bold; margin-bottom: 15px; font-family: 'Noto Sans Arabic', sans-serif;"></p>
+            <h3 id="uiCard3Title">اپنی غلطیاں درست کریں 🎧</h3>
+            <p id="mistakeMessage" style="font-size: 18px; color: #333; font-weight:bold; margin-bottom: 15px;"></p>
             <audio id="correctionAudio" controls>
                 <source src="" type="audio/mpeg">
                 آپ کا براؤزر آڈیو سپورٹ نہیں کرتا۔
             </audio>
         </div>
 
-        <div class="app-footer">
+        <div id="uiFooter" class="app-footer">
             لطافت اکیڈمی
         </div>
 
@@ -261,12 +277,70 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
+            
+            // --- بائی لنگول (Bilingual) ڈکشنری ---
+            const translations = {
+                ur: {
+                    title: "آئیے قرآن کریم سیکھیں",
+                    subTitle: "اپنی تلاوت کی درستگی جانچیں اور قاری مشاری راشد العفاسی سے اپنی اصلاح کریں",
+                    selectLoading: "سورتوں کی فہرست لوڈ ہو رہی ہے... ⏳",
+                    selectDefault: "-- سورت منتخب کریں --",
+                    btnSelectFirst: "پہلے سورت منتخب کریں",
+                    btnStart: "تلاوت شروع کریں",
+                    btnStop: "تلاوت بند کریں",
+                    statusSelect: "اوپر دی گئی لسٹ میں سے کوئی سورت چنیں۔",
+                    statusLoading: "سورت کا ڈیٹا لایا جا رہا ہے...",
+                    statusReady: "✅ آپ سورت کے درمیان سے کہیں سے بھی پڑھنا شروع کر سکتے ہیں۔",
+                    statusError: "❌ انٹرنیٹ کا مسئلہ! پیج ریفریش کریں۔",
+                    statusNoMic: "مائیک نے آواز نہیں پکڑی۔ براہ کرم دوبارہ کوشش کریں۔",
+                    statusOnlyBismillah: "آپ نے صرف بسم اللہ پڑھی ہے۔ براہ کرم آیات کی تلاوت کریں۔",
+                    statusPerfect: "ماشاءاللہ! آپ نے بالکل درست پڑھا۔ 🎉",
+                    statusRecording: "🔴 مائیک آن ہے... تلاوت ریکارڈ ہو رہی ہے",
+                    statusProcessing: "⏳ تلاوت مکمل ہو گئی۔ نتیجہ چیک کیا جا رہا ہے...",
+                    card1: "آپ نے جتنا پڑھا:",
+                    card2: "آپ کے پڑھے گئے مقام کا نتیجہ:",
+                    legend: "(<span class='correct-word'>سبز = درست</span> ، <span class='mistake-word'>سرخ = غلطی / چھوٹ گیا</span>)",
+                    card3: "اپنی غلطیاں درست کریں 🎧",
+                    footer: "لطافت اکیڈمی",
+                    toggleBtn: "English",
+                    dir: "rtl"
+                },
+                en: {
+                    title: "Let's Learn the Noble Quran",
+                    subTitle: "Test your recitation accuracy and correct your mistakes with Qari Mishary Alafasy",
+                    selectLoading: "Loading Surahs... ⏳",
+                    selectDefault: "-- Select a Surah --",
+                    btnSelectFirst: "Select a Surah First",
+                    btnStart: "Start Recitation",
+                    btnStop: "Stop Recitation",
+                    statusSelect: "Please select a Surah from the list above.",
+                    statusLoading: "Fetching Surah data...",
+                    statusReady: "✅ Ready! You can start reciting from anywhere in the Surah.",
+                    statusError: "❌ Internet issue! Please refresh the page.",
+                    statusNoMic: "Microphone didn't catch any sound. Please try again.",
+                    statusOnlyBismillah: "You only recited Bismillah. Please recite the Ayahs.",
+                    statusPerfect: "Mashallah! Your recitation is perfect. 🎉",
+                    statusRecording: "🔴 Mic is on... Recording your recitation",
+                    statusProcessing: "⏳ Recitation complete. Analyzing results...",
+                    card1: "What you recited:",
+                    card2: "Result of your recitation:",
+                    legend: "(<span class='correct-word'>Green = Correct</span> , <span class='mistake-word'>Red = Mistake / Missed</span>)",
+                    card3: "Correct your mistakes 🎧",
+                    footer: "Latafat Academy",
+                    toggleBtn: "اردو",
+                    dir: "ltr"
+                }
+            };
+
+            let currentLang = 'ur';
+            let allSurahsData = []; // سورتوں کا ڈیٹا محفوظ کرنے کے لیے
+
+            const htmlTag = document.getElementById('htmlTag');
+            const langToggleBtn = document.getElementById('langToggleBtn');
             const surahSelect = document.getElementById('surahSelect');
             const recordButton = document.getElementById('recordButton');
             const btnIcon = document.getElementById('btnIcon');
             const btnText = document.getElementById('btnText');
-            if (!recordButton) return; 
-
             const statusMessage = document.getElementById('statusMessage');
             const aiResponseContainer = document.getElementById('aiResponseContainer');
             const aiResponseText = document.getElementById('aiResponseText');
@@ -275,12 +349,59 @@
             const correctionContainer = document.getElementById('correctionContainer');
             const correctionAudio = document.getElementById('correctionAudio');
             const mistakeMessage = document.getElementById('mistakeMessage');
-            
+
+            // زبان بدلنے کا فنکشن
+            function updateLanguage() {
+                const t = translations[currentLang];
+                htmlTag.setAttribute('dir', t.dir);
+                htmlTag.setAttribute('lang', currentLang);
+                langToggleBtn.innerText = t.toggleBtn;
+
+                document.getElementById('pageTitle').innerText = t.title + " - " + t.footer;
+                document.getElementById('uiMainTitle').innerText = t.title;
+                document.getElementById('uiSubTitle').innerText = t.subTitle;
+                document.getElementById('uiCard1Title').innerText = t.card1;
+                document.getElementById('uiCard2Title').innerText = t.card2;
+                document.getElementById('uiLegend').innerHTML = t.legend;
+                document.getElementById('uiCard3Title').innerText = t.card3;
+                document.getElementById('uiFooter').innerText = t.footer;
+
+                if(recordButton.disabled) {
+                    btnText.innerText = t.btnSelectFirst;
+                    if(!surahSelect.value) statusMessage.innerText = t.statusSelect;
+                } else {
+                    btnText.innerText = isRecording ? t.btnStop : t.btnStart;
+                    if(!isRecording) statusMessage.innerText = t.statusReady;
+                }
+
+                // سورتوں کے نام اپڈیٹ کرنا (عربی یا انگلش)
+                if(allSurahsData.length > 0) {
+                    let currentVal = surahSelect.value;
+                    surahSelect.innerHTML = `<option value="">${t.selectDefault}</option>`;
+                    allSurahsData.forEach(surah => {
+                        let option = document.createElement('option');
+                        option.value = surah.number;
+                        // اگر اردو ہے تو عربی نام، اگر انگلش ہے تو انگلش نام
+                        let displayName = currentLang === 'ur' ? surah.name : surah.englishName;
+                        option.text = surah.number + ". " + displayName; 
+                        surahSelect.appendChild(option);
+                    });
+                    surahSelect.value = currentVal;
+                } else {
+                    document.getElementById('uiSelectDefault').innerText = t.selectLoading;
+                }
+            }
+
+            langToggleBtn.addEventListener('click', () => {
+                currentLang = currentLang === 'ur' ? 'en' : 'ur';
+                updateLanguage();
+            });
+
+            // --- باقی سارا سسٹم ---
             let targetWordsData = []; 
             let recognition;
             let isRecording = false;
             let finalTranscript = '';
-
             let mistakeAyahsList = [];
             let currentAudioIndex = 0;
 
@@ -288,20 +409,12 @@
                 try {
                     let res = await fetch('https://api.alquran.cloud/v1/surah');
                     let data = await res.json();
-                    
-                    surahSelect.innerHTML = '<option value="">-- سورت منتخب کریں --</option>';
-                    
-                    data.data.forEach(surah => {
-                        let option = document.createElement('option');
-                        option.value = surah.number;
-                        option.text = surah.number + ". " + surah.name; 
-                        surahSelect.appendChild(option);
-                    });
+                    allSurahsData = data.data;
+                    updateLanguage(); // زبان کے حساب سے لسٹ لوڈ کرے گا
                 } catch(err) {
-                    surahSelect.innerHTML = '<option value="">❌ سورتیں لوڈ نہیں ہو سکیں۔ انٹرنیٹ چیک کریں</option>';
+                    surahSelect.innerHTML = `<option value="">❌ ${translations[currentLang].statusError}</option>`;
                 }
             }
-            
             loadAllSurahs();
 
             function normalizeArabic(text) {
@@ -321,16 +434,20 @@
 
             surahSelect.addEventListener('change', async (e) => {
                 const surahNum = e.target.value;
+                const t = translations[currentLang];
+                
                 if(!surahNum) {
                     recordButton.disabled = true;
                     recordButton.style.opacity = '0.5';
                     btnIcon.innerText = '🎤';
-                    btnText.innerText = 'پہلے سورت منتخب کریں';
+                    btnText.innerText = t.btnSelectFirst;
+                    statusMessage.innerText = t.statusSelect;
+                    statusMessage.style.color = '#666';
                     return;
                 }
                 
                 recordButton.disabled = true;
-                statusMessage.innerText = 'سورت کا ڈیٹا لایا جا رہا ہے...';
+                statusMessage.innerText = t.statusLoading;
                 statusMessage.style.color = '#0E8A5D';
                 
                 try {
@@ -362,32 +479,36 @@
                     recordButton.style.cursor = 'pointer';
                     recordButton.style.opacity = '1';
                     btnIcon.innerText = '🎤';
-                    btnText.innerText = 'تلاوت شروع کریں';
-                    statusMessage.innerText = '✅ آپ سورت کے درمیان سے کہیں سے بھی پڑھنا شروع کر سکتے ہیں۔';
+                    btnText.innerText = t.btnStart;
+                    statusMessage.innerText = t.statusReady;
                     statusMessage.style.color = '#0E8A5D';
 
                 } catch(err) {
-                    statusMessage.innerText = '❌ انٹرنیٹ کا مسئلہ! پیج ریفریش کریں۔';
+                    statusMessage.innerText = t.statusError;
                     statusMessage.style.color = '#D32F2F';
                 }
             });
 
             correctionAudio.onended = function() {
                 if (currentAudioIndex < mistakeAyahsList.length) {
-                    mistakeMessage.innerText = `اب آیت نمبر ${mistakeAyahsList[currentAudioIndex].num} کی درست تلاوت سنیں:`;
+                    let currentNum = mistakeAyahsList[currentAudioIndex].num;
+                    let msg = currentLang === 'ur' ? `اب آیت نمبر ${currentNum} کی درست تلاوت سنیں:` : `Listen to the correct recitation of Ayah ${currentNum}:`;
+                    mistakeMessage.innerText = msg;
                     correctionAudio.src = mistakeAyahsList[currentAudioIndex].url;
                     correctionAudio.play();
                     currentAudioIndex++;
                 } else {
-                    mistakeMessage.innerText = `✅ آپ کی تمام غلطیوں کی درست تلاوت مکمل ہو گئی۔`;
+                    let msg = currentLang === 'ur' ? `✅ آپ کی تمام غلطیوں کی درست تلاوت مکمل ہو گئی۔` : `✅ Review of all your mistakes is complete.`;
+                    mistakeMessage.innerText = msg;
                 }
             };
 
             function checkPartialMistakes(spokenText) {
+                const t = translations[currentLang];
                 let spokenWords = normalizeArabic(spokenText).trim().split(/\s+/).filter(w => w.length > 0);
                 
                 if(spokenWords.length === 0) {
-                    statusMessage.innerText = "مائیک نے آواز نہیں پکڑی۔ براہ کرم دوبارہ کوشش کریں۔";
+                    statusMessage.innerText = t.statusNoMic;
                     return;
                 }
 
@@ -406,7 +527,7 @@
                 }
 
                 if(spokenWords.length === 0) {
-                    statusMessage.innerText = "آپ نے صرف بسم اللہ پڑھی ہے۔ براہ کرم آیات کی تلاوت کریں۔";
+                    statusMessage.innerText = t.statusOnlyBismillah;
                     return;
                 }
 
@@ -518,16 +639,17 @@
                 resultContainer.style.display = 'block';
 
                 if(mistakeAyahsList.length === 0) {
-                    statusMessage.innerText = `ماشاءاللہ! آپ نے بالکل درست پڑھا۔ 🎉`;
+                    statusMessage.innerText = t.statusPerfect;
                     statusMessage.style.color = '#0E8A5D';
                     correctionContainer.style.display = 'none';
                 } else {
                     let ayahNumbers = mistakeAyahsList.map(a => a.num).join(', ');
-                    statusMessage.innerText = `آپ نے آیات نمبر (${ayahNumbers}) میں غلطی کی ہے۔`;
+                    statusMessage.innerText = currentLang === 'ur' ? `آپ نے آیات نمبر (${ayahNumbers}) میں غلطی کی ہے۔` : `You made mistakes in Ayahs (${ayahNumbers}).`;
                     statusMessage.style.color = '#D32F2F';
                     
                     currentAudioIndex = 0;
-                    mistakeMessage.innerText = `آیت نمبر ${mistakeAyahsList[currentAudioIndex].num} کی درست تلاوت سنیں:`;
+                    let currentNum = mistakeAyahsList[currentAudioIndex].num;
+                    mistakeMessage.innerText = currentLang === 'ur' ? `آیت نمبر ${currentNum} کی درست تلاوت سنیں:` : `Listen to the correct recitation of Ayah ${currentNum}:`;
                     correctionAudio.src = mistakeAyahsList[currentAudioIndex].url; 
                     correctionContainer.style.display = 'block'; 
                     currentAudioIndex++; 
@@ -542,6 +664,7 @@
                 recognition.lang = 'ar-SA'; 
 
                 recognition.onstart = function() {
+                    const t = translations[currentLang];
                     isRecording = true;
                     finalTranscript = ''; 
                     aiResponseText.innerHTML = '';
@@ -553,9 +676,9 @@
                     recordButton.classList.remove('btn-green');
                     recordButton.classList.add('btn-red');
                     btnIcon.innerText = '⏹️';
-                    btnText.innerText = 'تلاوت بند کریں';
+                    btnText.innerText = t.btnStop;
                     
-                    statusMessage.innerText = '🔴 مائیک آن ہے... تلاوت ریکارڈ ہو رہی ہے';
+                    statusMessage.innerText = t.statusRecording;
                     statusMessage.style.color = "#D32F2F";
                     aiResponseContainer.style.display = 'block';
                 };
@@ -577,23 +700,25 @@
                 };
 
                 recognition.onerror = function(event) {
+                    const t = translations[currentLang];
                     isRecording = false;
                     recordButton.classList.remove('btn-red');
                     recordButton.classList.add('btn-green');
                     btnIcon.innerText = '🎤';
-                    btnText.innerText = 'تلاوت شروع کریں';
+                    btnText.innerText = t.btnStart;
                 };
 
                 recognition.onend = function() {
                     if(!isRecording) return; 
+                    const t = translations[currentLang];
                     isRecording = false;
                     
                     recordButton.classList.remove('btn-red');
                     recordButton.classList.add('btn-green');
                     btnIcon.innerText = '🎤';
-                    btnText.innerText = 'تلاوت شروع کریں';
+                    btnText.innerText = t.btnStart;
                     
-                    statusMessage.innerText = '⏳ تلاوت مکمل ہو گئی۔ نتیجہ چیک کیا جا رہا ہے...';
+                    statusMessage.innerText = t.statusProcessing;
                     statusMessage.style.color = "#0056b3";
 
                     setTimeout(() => {
