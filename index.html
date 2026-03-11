@@ -8,7 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Nastaliq+Urdu:wght@400;700&family=Noto+Sans+Arabic:wght@400;600&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* پیج کا بیک گراؤنڈ */
         body {
             background-color: #f0fdf4;
             margin: 0;
@@ -20,7 +19,6 @@
             min-height: 100vh;
             transition: all 0.3s ease;
         }
-
         .quran-app-wrapper {
             width: 100%;
             max-width: 800px;
@@ -35,8 +33,6 @@
             display: flex;
             flex-direction: column;
         }
-
-        /* لینگویج بٹن */
         .lang-toggle-btn {
             position: absolute;
             top: 20px;
@@ -52,15 +48,8 @@
             transition: all 0.3s;
             z-index: 10;
         }
-        .lang-toggle-btn:hover {
-            background: #0E8A5D;
-            color: white;
-        }
-        html[dir="ltr"] .lang-toggle-btn {
-            right: auto;
-            left: 20px;
-        }
-
+        .lang-toggle-btn:hover { background: #0E8A5D; color: white; }
+        html[dir="ltr"] .lang-toggle-btn { right: auto; left: 20px; }
         .quran-premium-header {
             text-align: center;
             margin-top: 20px;
@@ -68,14 +57,7 @@
             padding-bottom: 25px;
             border-bottom: 2px dashed #cce8d6;
         }
-        .bismillah-text {
-            font-family: 'Amiri', serif;
-            font-size: 28px;
-            color: #14B87D;
-            margin-bottom: 10px;
-        }
-        
-        /* اردو اور انگلش کے لیے الگ الگ فونٹس کی سیٹنگ */
+        .bismillah-text { font-family: 'Amiri', serif; font-size: 28px; color: #14B87D; margin-bottom: 10px; }
         .main-title {
             color: #0E8A5D;
             font-family: 'Noto Nastaliq Urdu', serif;
@@ -85,12 +67,7 @@
             font-weight: 700;
             text-shadow: 1px 2px 4px rgba(14, 138, 93, 0.15);
         }
-        html[dir="ltr"] .main-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 32px;
-            margin-bottom: 10px;
-        }
-
+        html[dir="ltr"] .main-title { font-family: 'Poppins', sans-serif; font-size: 32px; margin-bottom: 10px; }
         .sub-title {
             color: #444;
             font-size: 18px;
@@ -102,11 +79,7 @@
             border: 1px solid #cce8d6;
             margin-bottom: 10px;
         }
-        html[dir="ltr"] .sub-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 14px;
-        }
-
+        html[dir="ltr"] .sub-title { font-family: 'Poppins', sans-serif; font-size: 14px; }
         .quran-select-box {
             width: 100%;
             max-width: 400px;
@@ -121,7 +94,6 @@
             margin: 0 auto;
         }
         .quran-select-box:focus { border-color: #0E8A5D; outline: none; }
-
         .quran-btn {
             display: block;
             margin: 25px auto;
@@ -135,25 +107,15 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
         html[dir="ltr"] .quran-btn { font-family: 'Poppins', sans-serif; font-size: 16px; }
-
         .btn-green { background: linear-gradient(135deg, #0E8A5D, #14B87D); color: white; }
         .btn-green:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(14, 138, 93, 0.3); }
         .btn-red { background: linear-gradient(135deg, #D32F2F, #F44336); color: white; animation: pulse 1.5s infinite; }
-        
         @keyframes pulse {
             0% { box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.7); }
             70% { box-shadow: 0 0 0 15px rgba(244, 67, 54, 0); }
             100% { box-shadow: 0 0 0 0 rgba(244, 67, 54, 0); }
         }
-
-        .quran-status {
-            text-align: center;
-            font-size: 16px;
-            font-weight: bold;
-            padding: 10px;
-            margin-top: 10px;
-        }
-
+        .quran-status { text-align: center; font-size: 16px; font-weight: bold; padding: 10px; margin-top: 10px; }
         .quran-card {
             background: #f8fdfa;
             border: 1px solid #cce8d6;
@@ -164,53 +126,28 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.03);
         }
         .quran-card h3 {
-            margin-top: 0;
-            color: #0E8A5D;
-            font-size: 20px;
-            border-bottom: 2px dashed #cce8d6;
-            padding-bottom: 10px;
-            margin-bottom: 15px;
+            margin-top: 0; color: #0E8A5D; font-size: 20px;
+            border-bottom: 2px dashed #cce8d6; padding-bottom: 10px; margin-bottom: 15px;
         }
-        
-        /* عربی ٹیکسٹ ہمیشہ عربی فونٹ میں اور دائیں سے بائیں رہے گا، چاہے انگلش موڈ ہو */
         .quran-arabic-text {
             font-size: 36px !important;
             font-family: 'Amiri', 'Traditional Arabic', serif !important;
-            color: #222;
-            line-height: 2.2;
-            text-align: right;
-            text-align-last: center;
-            direction: rtl; 
+            color: #222; line-height: 2.2; text-align: right;
+            text-align-last: center; direction: rtl; 
         }
-
         .quran-correction-card {
-            background: #fff5f5;
-            border: 1px solid #ffcdd2;
-            border-radius: 12px;
-            padding: 25px;
-            margin-top: 25px;
-            display: none;
-            text-align: center;
+            background: #fff5f5; border: 1px solid #ffcdd2; border-radius: 12px;
+            padding: 25px; margin-top: 25px; display: none; text-align: center;
         }
         .quran-correction-card h3 { color: #d32f2f; margin-top: 0; font-size: 22px; }
         .quran-correction-card audio { width: 100%; margin-top: 15px; border-radius: 50px; }
-
         .mistake-word { color: #d32f2f; text-decoration: underline; text-decoration-color: #ffcdd2; text-underline-offset: 8px; font-weight: bold; }
         .correct-word { color: #0E8A5D; }
-        
         .app-footer {
-            text-align: center;
-            margin-top: 40px; 
-            padding-top: 20px;
-            border-top: 1px solid #eaeaea; 
-            font-family: 'Noto Nastaliq Urdu', serif;
-            font-size: 18px; 
-            color: #0E8A5D; 
-            line-height: 1.8;
-            width: 100%;
+            text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #eaeaea; 
+            font-family: 'Noto Nastaliq Urdu', serif; font-size: 18px; color: #0E8A5D; line-height: 1.8; width: 100%;
         }
         html[dir="ltr"] .app-footer { font-family: 'Poppins', sans-serif; font-weight: bold; font-size: 14px; }
-
         @media (max-width: 600px) {
             .quran-app-wrapper { padding: 20px 15px; }
             .main-title { font-size: 36px; }
@@ -224,9 +161,7 @@
 <body>
 
     <div class="quran-app-wrapper">
-        
         <button id="langToggleBtn" class="lang-toggle-btn">English</button>
-
         <div class="quran-premium-header">
             <div class="bismillah-text">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
             <h1 id="uiMainTitle" class="main-title">آئیے قرآن کریم سیکھیں</h1>
@@ -269,16 +204,11 @@
             </audio>
         </div>
 
-        <div id="uiFooter" class="app-footer">
-            لطافت اکیڈمی
-        </div>
-
+        <div id="uiFooter" class="app-footer">لطافت اکیڈمی</div>
     </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            
-            // --- بائی لنگول (Bilingual) ڈکشنری ---
             const translations = {
                 ur: {
                     title: "آئیے قرآن کریم سیکھیں",
@@ -333,7 +263,7 @@
             };
 
             let currentLang = 'ur';
-            let allSurahsData = []; // سورتوں کا ڈیٹا محفوظ کرنے کے لیے
+            let allSurahsData = [];
 
             const htmlTag = document.getElementById('htmlTag');
             const langToggleBtn = document.getElementById('langToggleBtn');
@@ -350,7 +280,11 @@
             const correctionAudio = document.getElementById('correctionAudio');
             const mistakeMessage = document.getElementById('mistakeMessage');
 
-            // زبان بدلنے کا فنکشن
+            // 🏆 اینٹی ڈپلیکیشن اور آٹو ری سٹارٹ ویری ایبلز 🏆
+            let globalTranscript = ''; 
+            let sessionFinal = '';
+            let userStopped = true;
+
             function updateLanguage() {
                 const t = translations[currentLang];
                 htmlTag.setAttribute('dir', t.dir);
@@ -370,18 +304,16 @@
                     btnText.innerText = t.btnSelectFirst;
                     if(!surahSelect.value) statusMessage.innerText = t.statusSelect;
                 } else {
-                    btnText.innerText = isRecording ? t.btnStop : t.btnStart;
-                    if(!isRecording) statusMessage.innerText = t.statusReady;
+                    btnText.innerText = !userStopped ? t.btnStop : t.btnStart;
+                    if(userStopped) statusMessage.innerText = t.statusReady;
                 }
 
-                // سورتوں کے نام اپڈیٹ کرنا (عربی یا انگلش)
                 if(allSurahsData.length > 0) {
                     let currentVal = surahSelect.value;
                     surahSelect.innerHTML = `<option value="">${t.selectDefault}</option>`;
                     allSurahsData.forEach(surah => {
                         let option = document.createElement('option');
                         option.value = surah.number;
-                        // اگر اردو ہے تو عربی نام، اگر انگلش ہے تو انگلش نام
                         let displayName = currentLang === 'ur' ? surah.name : surah.englishName;
                         option.text = surah.number + ". " + displayName; 
                         surahSelect.appendChild(option);
@@ -397,11 +329,8 @@
                 updateLanguage();
             });
 
-            // --- باقی سارا سسٹم ---
             let targetWordsData = []; 
             let recognition;
-            let isRecording = false;
-            let finalTranscript = '';
             let mistakeAyahsList = [];
             let currentAudioIndex = 0;
 
@@ -410,7 +339,7 @@
                     let res = await fetch('https://api.alquran.cloud/v1/surah');
                     let data = await res.json();
                     allSurahsData = data.data;
-                    updateLanguage(); // زبان کے حساب سے لسٹ لوڈ کرے گا
+                    updateLanguage();
                 } catch(err) {
                     surahSelect.innerHTML = `<option value="">❌ ${translations[currentLang].statusError}</option>`;
                 }
@@ -453,7 +382,6 @@
                 try {
                     let textRes = await fetch('https://api.alquran.cloud/v1/surah/' + surahNum);
                     let textData = await textRes.json();
-                    
                     let audioRes = await fetch('https://api.alquran.cloud/v1/surah/' + surahNum + '/ar.alafasy');
                     let audioData = await audioRes.json();
 
@@ -553,10 +481,7 @@
                         if (activeTargetWords[i].normalized === spokenWords[s] && 
                             activeTargetWords[i+1].normalized === spokenWords[s+1] &&
                             activeTargetWords[i+2].normalized === spokenWords[s+2]) {
-                            tAnchor = i; 
-                            sAnchor = s; 
-                            foundAnchor = true;
-                            break;
+                            tAnchor = i; sAnchor = s; foundAnchor = true; break;
                         }
                     }
                     if(foundAnchor) break;
@@ -567,10 +492,7 @@
                         for (let i = 0; i < activeTargetWords.length - 1; i++) {
                             if (activeTargetWords[i].normalized === spokenWords[s] && 
                                 activeTargetWords[i+1].normalized === spokenWords[s+1]) {
-                                tAnchor = i;
-                                sAnchor = s;
-                                foundAnchor = true;
-                                break;
+                                tAnchor = i; sAnchor = s; foundAnchor = true; break;
                             }
                         }
                         if(foundAnchor) break;
@@ -581,8 +503,7 @@
                     tIndex = Math.max(0, tAnchor - sAnchor); 
                     sIndex = 0; 
                 } else {
-                    tIndex = 0;
-                    sIndex = 0;
+                    tIndex = 0; sIndex = 0;
                 }
 
                 let resultHTML = "";
@@ -604,11 +525,9 @@
 
                     if (spokenWord === targetWord.normalized) {
                         resultHTML += '<span class="correct-word">' + targetWord.display + '</span> ';
-                        sIndex++;
-                        tIndex++;
+                        sIndex++; tIndex++;
                     } else {
                         let foundMatch = false;
-                        
                         for (let offset = 1; offset <= 6; offset++) {
                             if (tIndex + offset < activeTargetWords.length && activeTargetWords[tIndex + offset].normalized === spokenWord) {
                                 for(let k=0; k < offset; k++) {
@@ -616,21 +535,16 @@
                                     recordMistake(activeTargetWords[tIndex]);
                                     tIndex++;
                                 }
-                                foundMatch = true;
-                                break;
+                                foundMatch = true; break;
                             }
                             else if (sIndex + offset < spokenWords.length && spokenWords[sIndex + offset] === targetWord.normalized) {
-                                sIndex += offset; 
-                                foundMatch = true;
-                                break;
+                                sIndex += offset; foundMatch = true; break;
                             }
                         }
-
                         if (!foundMatch) {
                             resultHTML += '<span class="mistake-word">' + targetWord.display + '</span> ';
                             recordMistake(targetWord);
-                            tIndex++;
-                            sIndex++;
+                            tIndex++; sIndex++;
                         }
                     }
                 }
@@ -664,72 +578,98 @@
                 recognition.lang = 'ar-SA'; 
 
                 recognition.onstart = function() {
+                    if (userStopped) return; // Ghost start prevention
                     const t = translations[currentLang];
-                    isRecording = true;
-                    finalTranscript = ''; 
-                    aiResponseText.innerHTML = '';
-                    resultContainer.style.display = 'none'; 
-                    correctionContainer.style.display = 'none'; 
-                    correctionAudio.pause();
-                    correctionAudio.currentTime = 0;
+                    sessionFinal = ''; 
                     
-                    recordButton.classList.remove('btn-green');
-                    recordButton.classList.add('btn-red');
-                    btnIcon.innerText = '⏹️';
-                    btnText.innerText = t.btnStop;
-                    
-                    statusMessage.innerText = t.statusRecording;
-                    statusMessage.style.color = "#D32F2F";
-                    aiResponseContainer.style.display = 'block';
+                    // صرف پہلی دفعہ UI اپڈیٹ کرو
+                    if (globalTranscript === '') {
+                        aiResponseText.innerHTML = '';
+                        resultContainer.style.display = 'none'; 
+                        correctionContainer.style.display = 'none'; 
+                        correctionAudio.pause();
+                        correctionAudio.currentTime = 0;
+                        
+                        recordButton.classList.remove('btn-green');
+                        recordButton.classList.add('btn-red');
+                        btnIcon.innerText = '⏹️';
+                        btnText.innerText = t.btnStop;
+                        
+                        statusMessage.innerText = t.statusRecording;
+                        statusMessage.style.color = "#D32F2F";
+                        aiResponseContainer.style.display = 'block';
+                    }
                 };
 
                 recognition.onresult = function(event) {
                     let interimTranscript = ''; 
-                    for (let i = event.resultIndex; i < event.results.length; ++i) {
+                    let tempFinal = '';
+                    
+                    // 🏆 Anti-Duplication Engine (کوڈ کو دوبارہ بلڈ کرنا) 🏆
+                    for (let i = 0; i < event.results.length; ++i) {
                         if (event.results[i].isFinal) {
-                            finalTranscript += event.results[i][0].transcript + ' ';
+                            tempFinal += event.results[i][0].transcript + ' ';
                         } else {
                             interimTranscript += event.results[i][0].transcript;
                         }
                     }
+                    sessionFinal = tempFinal;
                     
-                    let displayFinal = visualNormalizeArabic(finalTranscript);
+                    let combinedFinal = globalTranscript + ' ' + sessionFinal;
+                    let displayFinal = visualNormalizeArabic(combinedFinal);
                     let displayInterim = visualNormalizeArabic(interimTranscript);
                     
                     aiResponseText.innerHTML = displayFinal + '<span style="color: #bbb;">' + displayInterim + '</span>';
                 };
 
                 recognition.onerror = function(event) {
-                    const t = translations[currentLang];
-                    isRecording = false;
-                    recordButton.classList.remove('btn-red');
-                    recordButton.classList.add('btn-green');
-                    btnIcon.innerText = '🎤';
-                    btnText.innerText = t.btnStart;
+                    if(event.error === 'no-speech') return; // Ignore empty pauses
                 };
 
                 recognition.onend = function() {
-                    if(!isRecording) return; 
-                    const t = translations[currentLang];
-                    isRecording = false;
-                    
-                    recordButton.classList.remove('btn-red');
-                    recordButton.classList.add('btn-green');
-                    btnIcon.innerText = '🎤';
-                    btnText.innerText = t.btnStart;
-                    
-                    statusMessage.innerText = t.statusProcessing;
-                    statusMessage.style.color = "#0056b3";
+                    if (!userStopped) {
+                        // 🚀 Auto-Restart Engine (اگر مائیک خود بند ہو تو دوبارہ آن کرو) 🚀
+                        if(sessionFinal.trim() !== '') {
+                            globalTranscript += ' ' + sessionFinal;
+                        }
+                        try { recognition.start(); } catch(e) {}
+                    } else {
+                        // جب یوزر خود بٹن دبا کر بند کرے
+                        const t = translations[currentLang];
+                        if(sessionFinal.trim() !== '') {
+                            globalTranscript += ' ' + sessionFinal;
+                        }
+                        
+                        recordButton.classList.remove('btn-red');
+                        recordButton.classList.add('btn-green');
+                        btnIcon.innerText = '🎤';
+                        btnText.innerText = t.btnStart;
+                        
+                        statusMessage.innerText = t.statusProcessing;
+                        statusMessage.style.color = "#0056b3";
 
-                    setTimeout(() => {
-                        checkPartialMistakes(finalTranscript);
-                    }, 1000); 
+                        setTimeout(() => {
+                            checkPartialMistakes(globalTranscript);
+                        }, 1000); 
+                    }
                 };
             }
 
+            // 🔴 بٹن کا نیا کنٹرول سسٹم 🔴
             recordButton.addEventListener('click', () => {
                 if (!recognition) return;
-                if (isRecording) { recognition.stop(); } else { recognition.start(); }
+                
+                if (userStopped) {
+                    // Start Recording
+                    userStopped = false;
+                    globalTranscript = '';
+                    sessionFinal = '';
+                    recognition.start();
+                } else {
+                    // Stop Recording
+                    userStopped = true;
+                    recognition.stop();
+                }
             });
         });
     </script>
