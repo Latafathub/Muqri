@@ -280,9 +280,8 @@
             const correctionAudio = document.getElementById('correctionAudio');
             const mistakeMessage = document.getElementById('mistakeMessage');
 
-            // 🏆 اینٹی ڈپلیکیشن اور آٹو ری سٹارٹ ویری ایبلز 🏆
+            // 🏆 پرفیکٹ اینٹی ڈپلیکیشن اور آٹو ری سٹارٹ ویری ایبلز 🏆
             let globalTranscript = ''; 
-            let sessionFinal = '';
             let userStopped = true;
 
             function updateLanguage() {
@@ -578,11 +577,11 @@
                 recognition.lang = 'ar-SA'; 
 
                 recognition.onstart = function() {
-                    if (userStopped) return; // Ghost start prevention
-                    const t = translations[currentLang];
-                    sessionFinal = ''; 
+                    if (userStopped) return; // گھوسٹ اسٹارٹ کو روکنے کے لیے
                     
-                    // صرف پہلی دفعہ UI اپڈیٹ کرو
+                    const t = translations[currentLang];
+                    
+                    // صرف پہلی دفعہ جب بٹن دبایا جائے تب UI اپڈیٹ کریں
                     if (globalTranscript === '') {
                         aiResponseText.innerHTML = '';
                         resultContainer.style.display = 'none'; 
@@ -603,42 +602,38 @@
 
                 recognition.onresult = function(event) {
                     let interimTranscript = ''; 
-                    let tempFinal = '';
+                    let newFinal = '';
                     
-                    // 🏆 Anti-Duplication Engine (کوڈ کو دوبارہ بلڈ کرنا) 🏆
-                    for (let i = 0; i < event.results.length; ++i) {
+                    // 🚀 پرفیکٹ لوپ: اب یہ صرف نئے الفاظ کو پکڑے گا، پرانے الفاظ نہیں دہرائے گا! 🚀
+                    for (let i = event.resultIndex; i < event.results.length; ++i) {
                         if (event.results[i].isFinal) {
-                            tempFinal += event.results[i][0].transcript + ' ';
+                            newFinal += event.results[i][0].transcript + ' ';
                         } else {
                             interimTranscript += event.results[i][0].transcript;
                         }
                     }
-                    sessionFinal = tempFinal;
                     
-                    let combinedFinal = globalTranscript + ' ' + sessionFinal;
-                    let displayFinal = visualNormalizeArabic(combinedFinal);
+                    if (newFinal !== '') {
+                        globalTranscript += newFinal;
+                    }
+                    
+                    let displayFinal = visualNormalizeArabic(globalTranscript);
                     let displayInterim = visualNormalizeArabic(interimTranscript);
                     
                     aiResponseText.innerHTML = displayFinal + '<span style="color: #bbb;">' + displayInterim + '</span>';
                 };
 
                 recognition.onerror = function(event) {
-                    if(event.error === 'no-speech') return; // Ignore empty pauses
+                    if(event.error === 'no-speech') return; 
                 };
 
                 recognition.onend = function() {
                     if (!userStopped) {
-                        // 🚀 Auto-Restart Engine (اگر مائیک خود بند ہو تو دوبارہ آن کرو) 🚀
-                        if(sessionFinal.trim() !== '') {
-                            globalTranscript += ' ' + sessionFinal;
-                        }
+                        // 🚀 مائیک خود بند ہو تو آپ کا ڈیٹا کھوئے بغیر دوبارہ آن کر دے گا!
                         try { recognition.start(); } catch(e) {}
                     } else {
-                        // جب یوزر خود بٹن دبا کر بند کرے
+                        // جب آپ خود تلاوت بند کریں گے
                         const t = translations[currentLang];
-                        if(sessionFinal.trim() !== '') {
-                            globalTranscript += ' ' + sessionFinal;
-                        }
                         
                         recordButton.classList.remove('btn-red');
                         recordButton.classList.add('btn-green');
@@ -655,18 +650,17 @@
                 };
             }
 
-            // 🔴 بٹن کا نیا کنٹرول سسٹم 🔴
+            // 🔴 بٹن کا نیا سمارٹ کنٹرول 🔴
             recordButton.addEventListener('click', () => {
                 if (!recognition) return;
                 
                 if (userStopped) {
-                    // Start Recording
+                    // تلاوت شروع کرنے کا عمل
                     userStopped = false;
-                    globalTranscript = '';
-                    sessionFinal = '';
+                    globalTranscript = ''; // پچھلا سارا ڈیٹا صاف کر دیں
                     recognition.start();
                 } else {
-                    // Stop Recording
+                    // تلاوت بند کرنے کا عمل
                     userStopped = true;
                     recognition.stop();
                 }
