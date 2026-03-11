@@ -280,8 +280,9 @@
             const correctionAudio = document.getElementById('correctionAudio');
             const mistakeMessage = document.getElementById('mistakeMessage');
 
-            // 🏆 پرفیکٹ اینٹی ڈپلیکیشن اور آٹو ری سٹارٹ ویری ایبلز 🏆
-            let globalTranscript = ''; 
+            // 🏆 اینٹی ڈپلیکیشن انجن کے نئے متغیرات 🏆
+            let savedTranscript = ''; // پرانے سیشنز کا محفوظ شدہ ڈیٹا
+            let currentSessionTranscript = ''; // موجودہ سیشن (مائیک آن ہونے کے بعد کا) ڈیٹا
             let userStopped = true;
 
             function updateLanguage() {
@@ -577,12 +578,12 @@
                 recognition.lang = 'ar-SA'; 
 
                 recognition.onstart = function() {
-                    if (userStopped) return; // گھوسٹ اسٹارٹ کو روکنے کے لیے
+                    if (userStopped) return; 
                     
                     const t = translations[currentLang];
                     
-                    // صرف پہلی دفعہ جب بٹن دبایا جائے تب UI اپڈیٹ کریں
-                    if (globalTranscript === '') {
+                    // صرف پہلی بار جب تلاوت شروع ہو تو UI کو سیٹ کریں
+                    if (savedTranscript === '') {
                         aiResponseText.innerHTML = '';
                         resultContainer.style.display = 'none'; 
                         correctionContainer.style.display = 'none'; 
@@ -602,22 +603,22 @@
 
                 recognition.onresult = function(event) {
                     let interimTranscript = ''; 
-                    let newFinal = '';
+                    let finalTranscriptForThisSession = '';
                     
-                    // 🚀 پرفیکٹ لوپ: اب یہ صرف نئے الفاظ کو پکڑے گا، پرانے الفاظ نہیں دہرائے گا! 🚀
-                    for (let i = event.resultIndex; i < event.results.length; ++i) {
+                    // 🚀 ہم پچھلے الفاظ جوڑنے کے بجائے ہر بار زیرو انڈیکس سے صرف فائنل الفاظ اٹھائیں گے
+                    for (let i = 0; i < event.results.length; ++i) {
                         if (event.results[i].isFinal) {
-                            newFinal += event.results[i][0].transcript + ' ';
+                            finalTranscriptForThisSession += event.results[i][0].transcript + ' ';
                         } else {
-                            interimTranscript += event.results[i][0].transcript;
+                            interimTranscript += event.results[i][0].transcript + ' ';
                         }
                     }
                     
-                    if (newFinal !== '') {
-                        globalTranscript += newFinal;
-                    }
+                    currentSessionTranscript = finalTranscriptForThisSession;
                     
-                    let displayFinal = visualNormalizeArabic(globalTranscript);
+                    // پرانے محفوظ الفاظ اور اس سیشن کے نئے الفاظ کو ملا کر ڈسپلے کریں گے
+                    let combinedFinal = savedTranscript + ' ' + currentSessionTranscript;
+                    let displayFinal = visualNormalizeArabic(combinedFinal);
                     let displayInterim = visualNormalizeArabic(interimTranscript);
                     
                     aiResponseText.innerHTML = displayFinal + '<span style="color: #bbb;">' + displayInterim + '</span>';
@@ -629,11 +630,14 @@
 
                 recognition.onend = function() {
                     if (!userStopped) {
-                        // 🚀 مائیک خود بند ہو تو آپ کا ڈیٹا کھوئے بغیر دوبارہ آن کر دے گا!
+                        // 🚀 اگر مائیک خود بند ہو تو موجودہ الفاظ محفوظ کر کے دوبارہ آن کر دو
+                        savedTranscript += ' ' + currentSessionTranscript;
+                        currentSessionTranscript = ''; // نئے سیشن کے لیے اسے خالی کر دو
                         try { recognition.start(); } catch(e) {}
                     } else {
-                        // جب آپ خود تلاوت بند کریں گے
+                        // جب یوزر خود روکے
                         const t = translations[currentLang];
+                        savedTranscript += ' ' + currentSessionTranscript;
                         
                         recordButton.classList.remove('btn-red');
                         recordButton.classList.add('btn-green');
@@ -644,23 +648,22 @@
                         statusMessage.style.color = "#0056b3";
 
                         setTimeout(() => {
-                            checkPartialMistakes(globalTranscript);
+                            checkPartialMistakes(savedTranscript);
                         }, 1000); 
                     }
                 };
             }
 
-            // 🔴 بٹن کا نیا سمارٹ کنٹرول 🔴
+            // 🔴 بٹن کا نیا کنٹرول 🔴
             recordButton.addEventListener('click', () => {
                 if (!recognition) return;
                 
                 if (userStopped) {
-                    // تلاوت شروع کرنے کا عمل
                     userStopped = false;
-                    globalTranscript = ''; // پچھلا سارا ڈیٹا صاف کر دیں
+                    savedTranscript = ''; // سب کچھ خالی کر دیں
+                    currentSessionTranscript = '';
                     recognition.start();
                 } else {
-                    // تلاوت بند کرنے کا عمل
                     userStopped = true;
                     recognition.stop();
                 }
