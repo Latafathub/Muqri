@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>قرآن حفظ و تجوید ٹیسٹ</title>
+    <title>قرآن حفظ و تجوید ٹیسٹ - لطافت اکیڈمی</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Nastaliq+Urdu:wght@400;700&family=Noto+Sans+Arabic:wght@400;600&display=swap" rel="stylesheet">
 
@@ -32,6 +32,8 @@
             position: relative;
             overflow: hidden;
             box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
         }
         .quran-premium-header {
             text-align: center;
@@ -49,22 +51,24 @@
         .main-title {
             color: #0E8A5D;
             font-family: 'Noto Nastaliq Urdu', serif;
-            font-size: 46px; 
+            font-size: 48px; 
             line-height: 1.8;
-            margin: 0 0 10px 0;
+            margin: 0 0 15px 0;
             font-weight: 700;
             text-shadow: 1px 2px 4px rgba(14, 138, 93, 0.15);
         }
+        /* آپ کے بتائے ہوئے ڈیزائن کے مطابق سب ٹائٹل */
         .sub-title {
-            color: #555;
+            color: #444;
             font-family: 'Noto Sans Arabic', sans-serif;
             font-size: 18px;
             font-weight: 600;
             background: #f0fdf4;
             display: inline-block;
-            padding: 8px 20px;
+            padding: 12px 25px;
             border-radius: 50px;
             border: 1px solid #cce8d6;
+            margin-bottom: 10px;
         }
         .quran-select-box {
             width: 100%;
@@ -183,11 +187,24 @@
             color: #0E8A5D;
         }
         
-        /* موبائل کے لیے سیٹنگ */
+        .app-footer {
+            text-align: center;
+            margin-top: 40px; 
+            padding-top: 20px;
+            border-top: 1px solid #eaeaea; 
+            font-family: 'Noto Nastaliq Urdu', serif;
+            font-size: 18px; 
+            color: #0E8A5D; 
+            line-height: 1.8;
+            width: 100%;
+        }
+
         @media (max-width: 600px) {
             .quran-app-wrapper { padding: 20px 15px; }
-            .main-title { font-size: 32px; }
+            .main-title { font-size: 36px; }
+            .sub-title { font-size: 15px; padding: 10px 15px; }
             .quran-arabic-text { font-size: 28px !important; }
+            .app-footer { font-size: 16px; margin-top: 30px; }
         }
     </style>
 </head>
@@ -235,6 +252,11 @@
                 آپ کا براؤزر آڈیو سپورٹ نہیں کرتا۔
             </audio>
         </div>
+
+        <div class="app-footer">
+            لطافت اکیڈمی
+        </div>
+
     </div>
 
     <script>
@@ -587,5 +609,4 @@
         });
     </script>
 </body>
-
 </html>
